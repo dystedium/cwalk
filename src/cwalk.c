@@ -1512,3 +1512,47 @@ enum cwk_path_style cwk_path_get_style(void)
   // Simply return the path style which we store in a global variable.
   return default_state.path_style;
 }
+
+// extern inline declarations for public API functions
+// TODO: check if these can be removed once CWK_INLINE definition in cwalk.h
+// includes compiler-specific force inline directives
+#undef CWK_INLINE
+#define CWK_INLINE extern inline
+CWK_INLINE size_t cwk_path_get_absolute(const char *base, const char *path,
+  char *buffer, size_t buffer_size);
+CWK_INLINE size_t cwk_path_get_relative(const char *base_directory,
+  const char *path, char *buffer, size_t buffer_size);
+CWK_INLINE size_t cwk_path_join(const char *path_a, const char *path_b,
+  char *buffer, size_t buffer_size);
+CWK_INLINE size_t cwk_path_join_multiple(const char **paths, char *buffer,
+  size_t buffer_size);
+CWK_INLINE void cwk_path_get_root(const char *path, size_t *length);
+CWK_INLINE size_t cwk_path_change_root(const char *path, const char *new_root,
+  char *buffer, size_t buffer_size);
+CWK_INLINE bool cwk_path_is_absolute(const char *path);
+CWK_INLINE bool cwk_path_is_relative(const char *path);
+CWK_INLINE void cwk_path_get_basename(const char *path, const char **basename,
+  size_t *length);
+CWK_INLINE size_t cwk_path_change_basename(const char *path,
+  const char *new_basename, char *buffer, size_t buffer_size);
+CWK_INLINE void cwk_path_get_dirname(const char *path, size_t *length);
+CWK_INLINE bool cwk_path_get_extension(const char *path, const char **extension,
+  size_t *length);
+CWK_INLINE bool cwk_path_has_extension(const char *path);
+CWK_INLINE size_t cwk_path_change_extension(const char *path,
+  const char *new_extension, char *buffer, size_t buffer_size);
+CWK_INLINE size_t cwk_path_normalize(const char *path, char *buffer,
+  size_t buffer_size);
+CWK_INLINE size_t cwk_path_get_intersection(const char *path_base,
+  const char *path_other);
+CWK_INLINE bool cwk_path_get_first_segment(const char *path,
+  struct cwk_segment *segment);
+CWK_INLINE bool cwk_path_get_last_segment(const char *path,
+  struct cwk_segment *segment);
+CWK_INLINE bool cwk_path_get_next_segment(struct cwk_segment *segment);
+CWK_INLINE bool cwk_path_get_previous_segment(struct cwk_segment *segment);
+CWK_INLINE enum cwk_segment_type cwk_path_get_segment_type(
+  const struct cwk_segment *segment);
+CWK_INLINE size_t cwk_path_change_segment(struct cwk_segment *segment,
+  const char *value, char *buffer, size_t buffer_size);
+CWK_INLINE bool cwk_path_is_separator(const char *str);
